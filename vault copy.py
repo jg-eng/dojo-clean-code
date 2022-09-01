@@ -65,27 +65,6 @@ def handle_register_new_account():
     return [], password
 
 
-def handle_show_account(p_list):
-    a = Prompt.ask("Enter account website name").lower()
-    console.print("\n")
-
-
-    b = None
-    for i in range(len(p_list)):
-        if p_list[i]["website_name"] == a:
-            b = p_list[i]
-
-    print_accounts([b])
-
-
-def handle_delete_account():
-    
-
-
-def handle_exit():
-    
-
-
 def show_options():
     table = Table(title="Options")
 
@@ -99,6 +78,20 @@ def show_options():
     table.add_row("4", "Quit the program")
     table.add_row("5", "Show all saved accounts")
     table.add_row("6", "Delete everything")
+
+    console.print(table, justify="center")
+
+
+def show_accounts(p_list):
+    table = Table(title="Accounts")
+
+    table.add_column("Account name", style="cyan")
+    table.add_column("username", style="magenta")
+    table.add_column("password", style="magenta")
+
+    # adding the rows
+    for i in range(len(p_list)):
+        table.add_row(p_list[i]["website_name"], p_list[i]["username"], p_list[i]["password"])
 
     console.print(table, justify="center")
 
@@ -146,6 +139,7 @@ def main():
                 if p_list[i]["website_name"] == a:
                     b = p_list[i]
 
+            #console.print(b)
             print_accounts([b])
 
         elif option == "3":
@@ -169,7 +163,8 @@ def main():
             console.print("Quitting...")
             quit()
         elif option == "5":
-            print_accounts(p_list)
+            show_accounts(p_list)
+            #console.print(p_list)
         elif option == "6":
             pass
         else:
